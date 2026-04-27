@@ -1,7 +1,20 @@
 package com.aditya.learning_boot.controller;
 
+import com.aditya.learning_boot.model.Product;
+import com.aditya.learning_boot.service.ProductService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
+
+@RestController
 public class ProductController {
-    public String getProducts(){
-        return "";
+    @Autowired
+    ProductService service;
+
+    @RequestMapping("/products")
+    public List<Product> getProducts(){
+        return service.getProducts();
     }
 }

@@ -2,6 +2,7 @@ package com.aditya.learning_boot.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import org.springframework.stereotype.Component;
 
 @Data   // this annotation creates getter, setters, toString(), equals() all at compile time and we need these methods
 // because the data is private type

@@ -5,7 +5,9 @@ import com.aditya.learning_boot.repository.ProductRepo;
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -30,10 +32,14 @@ public class ProductService {
 
     public Product getProduct(int id){
         // done using stream api but can also be done using simple for loop
-        return repo.findById(id).orElse(new Product(0,"",0));
+        return repo.findById(id).orElse(new Product(0,"",0,null,"","",new byte[0]));
     }
 
-    public List<Product> addProduct(Product prod){
+    public List<Product> addProduct(Product prod, MultipartFile imageFile) throws IOException {
+        prod.setImageName(imageFile.getOriginalFilename()); // this will store image name from image file in prod
+        prod.setImageType(imageFile.getContentType()); // this will store file type
+        prod.setImageData(imageFile.getBytes());
+
         repo.save(prod);
         return repo.findAll();
     }

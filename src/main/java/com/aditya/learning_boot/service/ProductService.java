@@ -53,4 +53,8 @@ public class ProductService {
         repo.deleteById(id);
         return repo.findAll();
     }
+
+    public List<Product> searchProduct(String word){
+        return repo.searchProduct(word);
+    }
 }

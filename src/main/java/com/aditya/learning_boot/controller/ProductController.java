@@ -53,4 +53,16 @@ public class ProductController {
     public List<Product> deleteProduct(@PathVariable int id){
         return service.deleteProduct(id);
     }
+
+    // this will implement /products/search?word="x"
+    @GetMapping("/products/search")
+    public ResponseEntity<List<Product>> searchProduct(@RequestParam String word){
+        List<Product> prod=service.searchProduct(word);
+        if(prod!=null){
+            return new ResponseEntity<>(prod,HttpStatus.OK);
+        }
+        else{
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }
